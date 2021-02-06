@@ -1,0 +1,49 @@
+<%- include('partials/header'); %>
+    <div class="container-fluid bg-dark">
+        <div class="row justify-content-center mt-5">
+            <div clas="col">
+                <h1 class="text-center text-light text-center mt-5"><i class="bi bi-cup"></i> Registro de platos
+                </h1>
+            </div>
+        </div>
+        <div class="row justify-content-center mt-2">
+            <div class="col-md-6 border border-dark border-1 rounded bg-light mb-5">
+
+                <!-- EL FORMULARIO DEBE TENER enctype="multipart/form-data" para poder que viajen los datos de la imagen -->
+                <form method="POST" action="/registroPlato" enctype="multipart/form-data">
+                    <div class="mb-4 mt-3">
+                        <label for="username" class="form-label"><strong>Nombre Plato</strong></label>
+                        <input type="text" class="form-control" id="nombrePlato" name="nombrePlato"
+                            placeholder="ingrese el nombre del plato" required>
+                    </div>
+                    <label for="username" class="form-label"><strong>Disponibilidad</strong></label>
+                    <div class="form-check form-switch mb-4">
+                        <input class="form-check-input" type="checkbox" id="disponibilidad" name="disponibilidad"
+                            checked>
+                        <label class="form-check-label" for="flexSwitchCheckChecked">Disponible</label>
+                    </div>
+                    <div class="mb-4">
+                        <label for="precioPlato" class="form-label"><strong>Precio Plato</strong></label>
+                        <input type="number" class="form-control" id="precio" name="precioPlato"
+                            placeholder="ingrese el precio" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="fotoPlato" class="form-label"><strong>Imagen del plato</strong></label>
+                        <input class="form-control" type="file" id="fotoPlato" name="fotoPlato" required>
+                    </div>
+                    <p class="text-center mb-5">
+                        <button type="submit" name="guardar" class="btn btn-warning"
+                            title="Guardar Usuario"><strong>Guardar</strong> <i class="bi bi-check-circle"></i></button>
+                        <a href="/" class="btn btn-danger"><strong>Cancelar </strong> <i class="bi bi-x-circle"></i></a>
+                    </p>
+
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+    </main>
+    </body>
+
+    </html>

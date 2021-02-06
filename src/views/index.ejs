@@ -1,0 +1,105 @@
+<%- include('partials/header') %>
+    <div class="container">
+
+        <div class="row mt-5">
+            <div class="col-md-8 mt-5">
+                <h1><i class="bi bi-cup-fill"></i> Listado de Platos</h1>
+                <a class="btn btn-warning border border-dark border-1" href="/formularioPlatos" role="button"><i
+                        class="bi bi-patch-plus"></i> <strong>Agregar nuevo Plato</strong> </a>
+
+            </div>
+        </div>
+
+        <hr>
+        <div class="row mt-3 mb-5 row-cols-1 row-cols-md-3">
+            <% platos.forEach(function(plato){ %>
+                <% let color='' ; let disponibilidad='Disponible' ; if(plato.disponibilidad){ color='success' ; } else{
+                    color='danger' ; disponibilidad='No disponible' ; } %>
+                    <div class="col-md-3 mb-4">
+                        <div class="card h-100 bg-dark border border-dark border-2">
+                            <img src='<%=plato.fotoPlato %>' class="card-img-top w-100" alt="">
+                            <div class="card-body text-light">
+                                <h5 class="card-title"><i class="bi bi-star-fill"></i> <strong>
+                                        <%=plato.nombrePlato %>
+                                    </strong></h5>
+                                <p class="card-text text-<%=color %>"><strong>
+                                        <%=disponibilidad %>
+                                    </strong> </p>
+                                <p class="card-text">$
+                                    <%=plato.precioPlato %>
+                                </p>
+                                <p class="card-text text-info">
+                                    <%=format(plato.fechaCreacion) %>
+                                </p>
+                                <button type="button" class="btn btn-warning" data-bs-toggle="modal"
+                                    data-bs-target="#staticBackdrop<%=plato._id %>">
+                                    <i class="bi bi-pen"></i> <strong>Editar</strong>
+                                </button>
+                                <a class="btn btn-danger" href="/eliminarPlato/<%=plato._id %>" role="button"><i
+                                        class="bi bi-trash"></i>
+                                    <strong>Eliminar</strong></a>
+                                <!-- Modal -->
+
+                                <div class="modal fade animate__animated animate__swing"
+                                    id="staticBackdrop<%=plato._id %>" data-bs-backdrop="static"
+                                    data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+                                    aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <% let chequeado=null; if(plato.disponibilidad){ chequeado='checked' ; } %>
+                                                <div class="modal-header bg-dark text-warning">
+                                                    <h5 class="modal-title" id="staticBackdropLabel"><i
+                                                            class="bi bi-star-fill"></i>
+                                                        <%=plato.nombrePlato %>
+                                                    </h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                </div>
+                                                <form action="/editarPlato/<%=plato._id %>" method="POST">
+                                                    <div class="modal-body text-dark">
+
+                                                        <label for="username"
+                                                            class="form-label"><strong>Disponibilidad</strong></label>
+                                                        <div class="form-check form-switch mb-4">
+
+                                                            <input class="form-check-input" type="checkbox"
+                                                                id="disponibilidad2" name="disponibilidad2" <%=chequeado
+                                                                %>>
+                                                            <label class="form-check-label"
+                                                                for="flexSwitchCheckChecked">Disponible</label>
+                                                        </div>
+                                                        <div class="mb-4">
+                                                            <label for="precioPlato" class="form-label"><strong>Precio
+                                                                    Plato</strong></label>
+                                                            <input type="number" class="form-control" id="precioPlato2"
+                                                                name="precioPlato2" value="<%=plato.precioPlato %>"
+                                                                placeholder="ingrese el precio" required>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="modal-footer bg-dark">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-bs-dismiss="modal"><a href="/"></a>Cerrar <i
+                                                                class="bi bi-x-circle"></i></button>
+                                                        <button type="submit" class="btn btn-warning"><strong>Actualizar
+                                                            </strong><i class="bi bi-check-circle"></i></button>
+                                                    </div>
+                                                </form>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                    </div>
+                    <% })%>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+        crossorigin="anonymous"></script>
+    </main>
+    </body>
+
+    </html>
